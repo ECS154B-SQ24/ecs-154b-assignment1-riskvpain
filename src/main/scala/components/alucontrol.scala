@@ -31,9 +31,28 @@ class ALUControl extends Module {
 
     val operation = Output(UInt(5.W))
   })
+  
+  io.operation := "b11111".U
 
-  io.operation := "b11111".U // Invalid
-
-  //Your code goes here
+  when (io.funct7 === "b0000000".U)
+  {
+    when (io.funct3 === "b000".U)
+    {
+      io.operation := "b00001".U
+    }
+  }
+  .elsewhen (io.funct7 === "b0100000".U)
+  {
+    io.operation := "b11111".U
+  }
+  .elsewhen (io.funct7 === "b0000001".U)
+  {
+    io.operation := "b11111".U
+  }
+  .otherwise
+  {
+    io.operation := "b11111".U
+    printf(p"ERROR: UNKNOWN FUNCT7 INPUT")
+  }
 
 }
