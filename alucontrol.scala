@@ -35,83 +35,84 @@ class ALUControl extends Module {
   io.operation := "b11111".U // Invalid
 
   //Your code goes here
-   when (io.funct7 === 0.U) { // when funct7 = 0.U
-    when (io.aluop  === 1.U) { // condition for when aluop is 0
-        when (io.funct3 === 0.U) { // individual conditions
-          io.operation := 1.U
-        } .elsewhen (io.funct3 === 1.U) {
-           io.operation := 18.U
-        } .elsewhen (io.funct3 === 2.U) {
-           io.operation := 22.U
-        } .elsewhen (io.funct3 === 3.U) {
-           io.operation := 23.U
-        } .elsewhen (io.funct3 === 4.U) {
-          io.operation := 15.U
-        } .elsewhen (io.funct3 === 5.U) {
-          io.operation := 20.U
-        } .elsewhen (io.funct3 === 6.U) {
-          io.operation := 14.U
+   when (io.funct7 === "b00000".U) { // when funct7 = 0.U
+    when (io.aluop  === "b00001".U) { // condition for when aluop is 0
+        when (io.funct3 === "b00000".U) { // individual conditions
+          io.operation := "b00001".U
+        } .elsewhen (io.funct3 === "b00001".U) {
+           io.operation := "b10010".U
+        } .elsewhen (io.funct3 === "b00010".U) {
+           io.operation := "b10110".U
+        } .elsewhen (io.funct3 === "b00011".U) {
+           io.operation := "b10111".U
+        } .elsewhen (io.funct3 ==="b00100".U) {
+          io.operation := "b01111".U
+        } .elsewhen (io.funct3 === "b00101".U) {
+          io.operation := "b10100".U
+        } .elsewhen (io.funct3 === "b00110".U) {
+          io.operation := "b01110".U
         } .otherwise {
-          io.operation := 13.U
+          io.operation := "b01101".U
         }
     } .otherwise { // aluop is 1
-        when (io.funct3 === 0.U) { // individual conditions
-          io.operation := 0.U
-        } .elsewhen (io.funct3 === 1.U) {
-          io.operation := 19.U
+        when (io.funct3 === "b00000".U) { // individual conditions
+          io.operation := "b00000".U
+        } .elsewhen (io.funct3 === "b00001".U) {
+          io.operation := "b10011".U
         } otherwise {
-          io.operation := 21.U
+          io.operation := "b10101".U
         }
-    }
+     
+     }
+       
 
-  } .elsewhen (io.funct7 === 1.U) {
+  } .elsewhen (io.funct7 === "b00001".U) {
 
-    when (io.aluop  === 1.U) { // condition for when aluop is 0
-        when (io.funct3 === 0.U) { // individual conditions
-          io.operation := 6.U
-        } .elsewhen (io.funct3 === 1.U) {
-           io.operation := 7.U
-        } .elsewhen (io.funct3 === 2.U) {
-           io.operation := 8.U
-        } .elsewhen (io.funct3 === 3.U) {
-           io.operation := 24.U
-        } .elsewhen (io.funct3 === 4.U) {
-          io.operation := 11.U
-        } .elsewhen (io.funct3 === 5.U) {
-          io.operation := 10.U
-        } .elsewhen (io.funct3 === 6.U) {
-          io.operation := 28.U
+    when (io.aluop  === "b00001".U) { // condition for when aluop is 0
+        when (io.funct3 === "b00000".U) { // individual conditions
+          io.operation := "b00110".U
+        } .elsewhen (io.funct3 === "b00001".U) {
+           io.operation := "b00111".U
+        } .elsewhen (io.funct3 === "b00010".U) {
+           io.operation := "b11000".U
+        } .elsewhen (io.funct3 === "b00011".U) {
+           io.operation := "b01000".U
+        } .elsewhen (io.funct3 === "b00100".U) {
+          io.operation := "b01011".U // this is diff
+        } .elsewhen (io.funct3 === "b00101".U) {
+          io.operation := "b01010".U // this is diff
+        } .elsewhen (io.funct3 === "b00110".U) {
+          io.operation := "b11100".U
         } .otherwise {
-          io.operation := 27.U
+          io.operation := "b11011".U
         }
     } .otherwise { // aluop is 1
-        when (io.funct3 === 0.U) { // individual conditions
-          io.operation := 5.U
-        } .elsewhen (io.funct3 === 4.U) {
-          io.operation := 9.U
-        } .elsewhen (io.funct3 === 5.U) {
-          io.operation := 6.U
-        } .elsewhen (io.funct3 === 6.U) {
-          io.operation := 26.U
+        when (io.funct3 === "b00000".U) { // individual conditions
+          io.operation := "b00101".U
+        } .elsewhen (io.funct3 === "b00100".U) {
+          io.operation := "b01001".U
+        } .elsewhen (io.funct3 === "b00101".U) {
+          io.operation := "b01100".U
+        } .elsewhen (io.funct3 === "b00110".U) {
+          io.operation := "b11010".U
         } .otherwise {
-          io.operation := 25.U
+          io.operation := "b11001".U
         }
     } // end of aluop 1
 
   } .otherwise { // when funct7 == 32
-      when (io.aluop === 1.U) { // aluop == 1
-        when (io.funct3 === 0.U) {
-          io.operation := 4.U
+      when (io.aluop === "b00001".U) { // aluop == 1
+        when (io.funct3 === "b00000".U) {
+          io.operation := "b00100".U
         } .otherwise {
-          io.operation := 16.U
+            io.operation := "b10000".U
         }
       } .otherwise {
-        when (io.funct3 === 0.U) {
-          io.operation := 2.U
+        when (io.funct3 === "b00000".U) {
+          io.operation := "b00010".U
         } .otherwise {
-          io.operation := 17.U
+          io.operation := "b10001".U
         }
       } // end of aluop = 3
   } // end of funct7 vals
-                                                                                      }
-
+}                   
